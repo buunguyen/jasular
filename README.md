@@ -1,6 +1,6 @@
 ### Jasular: supercharged unit test support for Angular 1 and Jasmine
 
-Warning: this library is in very early stage development, use at your own risk.
+__Warning:__ this library is in very early stage development, use at your own risk.
 
 #### Interface
 
@@ -43,7 +43,8 @@ With Jasular, you can now write:
 // Global, once per app
 jasular.mocks({mockService1: [...], mockService2: [...]})
 
-describe('componentUnderTest', ['someModule'], (componentUnderTest, $ngDep1, $ngDep2, mockService1, mockService2) => {
+describe('componentUnderTest', ['someModule'], (
+  componentUnderTest, $ngDep1, $ngDep2, mockService1, mockService2) => {
   // "Real" test starts here...
 });
 ```
@@ -55,16 +56,23 @@ Jasular is smart enough to "reset" injected services before every test run even 
 ```js
 jasular.noProxy(['mockService2']);
 
-describe('componentUnderTest', ['someModule'], (componentUnderTest, $ngDep1, $ngDep2, mockService1, mockService2) => {
+describe('componentUnderTest', ['someModule'], (
+  componentUnderTest, $ngDep1, $ngDep2, mockService1, mockService2) => {
+
   it('...', () => {
     mockService2.obj; // obj -> wrapped object
   });
 });
 ```
 
+#### Environments
+
+* Best experience with JS runtimes supporting ES6 Proxy
+* Otherwise, use the wrapper escape and should run under any runtime
+
 #### Run Sample Test
 
-The `sample` directory contains a working example that shows tests written without Jasular, with Jasular and with the object wrapper workaround. To run these tests, use these commands (require `Node 8`):
+The `sample` directory contains a working example that shows tests written without Jasular, with Jasular and with the object wrapper workaround. To run these tests, use the following commands. Build script requires `Node 8`, for now.
 
 ```bash
 npm i && npm run build
